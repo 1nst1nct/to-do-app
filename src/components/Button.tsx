@@ -1,11 +1,7 @@
-type Button = {
-    dataBsTarget: string
-}
-
-export default function Button(props: Button) {
+export default function Button() {
     return (
         <>
-            <button type="button" data-bs-toggle="modal" data-bs-target={props.dataBsTarget} className="btn btn-primary">New Task</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#newTaskModal" className="btn btn-primary">New Task</button>
         </>
     );
 }
