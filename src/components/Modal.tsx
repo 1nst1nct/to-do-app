@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 
+type Task = {
+    title: string,
+    content: string
+}
+
 export default function Modal() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -17,7 +22,7 @@ export default function Modal() {
     };
 
     const handleOnClick = event => {
-        console.log("Title: " + title + " | " + "Content" + content)
+        localStorage.setItem(title, content)
     }
 
     return (
