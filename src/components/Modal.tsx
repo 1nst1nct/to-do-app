@@ -1,24 +1,15 @@
 import React, { useState } from "react";
 
-type Task = {
-    title: string,
-    content: string
-}
-
 export default function Modal() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
     const handleTitleChange = event => {
         setTitle(event.target.value);
-
-        console.log("Title is: " + event.target.value)
     };
 
     const handleContentChange = event => {
         setContent(event.target.value);
-
-        console.log("Content value: " + event.target.value)
     };
 
     const handleOnClick = event => {
@@ -61,7 +52,7 @@ export default function Modal() {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" className="btn btn-success" onClick={handleOnClick}>Adicionar tarefa</button>
+                        <button type="button" className="btn btn-success" data-bs-dismiss='modal' onClick={handleOnClick}>Adicionar tarefa</button>
                     </div>
                 </div>
             </div>

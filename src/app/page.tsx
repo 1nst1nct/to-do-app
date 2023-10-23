@@ -1,5 +1,6 @@
 'use client'
 
+import React, { useEffect } from "react";
 import Task from '@/components/Task'
 import Button from '@/components/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -17,9 +18,7 @@ export default function Home() {
         </div>
       </div>
       <div className='row row-gap-5'>
-        {Object.keys(localStorage).map((elem, index) => 
-            <Task title={Object.keys(localStorage)[index]} content={localStorage.getItem(elem)} />
-        )}
+        <Task />
       </div>
     </div>
   )
