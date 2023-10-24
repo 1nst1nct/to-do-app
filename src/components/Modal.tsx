@@ -1,8 +1,35 @@
 import React, { useState } from "react";
 
 export default function Modal() {
+
+    function titleAlert() {
+        if (title === "") {
+            return (
+                <div className="alert alert-danger mt-2 text-center" id="titleAlert" role="alert">
+                    O campo 'título' precisa ser preenchido!
+                </div>
+            );
+        } else {
+            document.getElementById("alertTitle")?.remove()
+        }
+    }
+
+    function contentAlert() {
+        if (content === "") {
+            return (
+                <div className="alert alert-danger mt-2 text-center" id="contentAlert" role="alert">
+                    O campo 'descrição da tarefa' precisa ser preenchido!
+                </div>
+            );
+        } else {
+            document.getElementById("alertContent")?.remove()
+        }
+    }
+
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [isTitleBlank, setIsTitleBlank] = useState(false)
+    const [isContentBlank, setIsContentBlank] = useState(false)
 
     const handleTitleChange = event => {
         setTitle(event.target.value);
@@ -13,8 +40,15 @@ export default function Modal() {
     };
 
     const handleOnClick = event => {
-        localStorage.setItem(title, content)
-    }
+        if (title === "" || content === "") {
+            setIsTitleBlank(true)
+            setIsContentBlank(true)
+        } else {
+            setIsTitleBlank(false)
+            setIsContentBlank(false)
+            localStorage.setItem(title, content)
+        }
+    };
 
     return (
         <div className="modal fade" id="newTaskModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -24,9 +58,10 @@ export default function Modal() {
                         <h1 className="modal-title fs-5" id="exampleModalLabel">Nova tarefa</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="modal-body">
+                    <div className="modal-body" id="modalBody">
                         <div className="input-group">
                             <input
+                                autoComplete="false"
                                 type="text"
                                 className="form-control"
                                 name="title"
@@ -37,8 +72,12 @@ export default function Modal() {
                                 onChange={handleTitleChange}
                             />
                         </div>
+
+                        {isTitleBlank ? titleAlert() : ""}
+
                         <div className="form-floating mt-2">
                             <textarea
+                                autoComplete="false"
                                 className="form-control"
                                 name="content"
                                 placeholder="Leave a comment here"
@@ -49,10 +88,13 @@ export default function Modal() {
                             </textarea>
                             <label htmlFor="floatingTextarea2">Descrição da tarefa</label>
                         </div>
+
+                        {isContentBlank ? contentAlert() : ""}
+
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" className="btn btn-success" data-bs-dismiss='modal' onClick={handleOnClick}>Adicionar tarefa</button>
+                        <button type="button" className="btn btn-success" onClick={handleOnClick} data-bs-dismiss={((content === "") || (title === "")) ? "" : "modal"} id="addTask">Adicionar tarefa</button>
                     </div>
                 </div>
             </div>

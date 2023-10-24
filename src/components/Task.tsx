@@ -2,17 +2,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from "react";
 
 export default function Task() {
-    {
-        const [title, setTitle] = useState(localStorage.getItem(Object.keys(localStorage)[0]) || '');
-        const [content, setContent] = useState(localStorage.getItem("Tarefa 1"));
-
-        useEffect(() => {
-            const dadosSalvos = localStorage.getItem('Tarefa 1');
-            if (dadosSalvos) {
-                setTitle(dadosSalvos);
-            }
-        }, []);
-    }
 
     return (
         <>
